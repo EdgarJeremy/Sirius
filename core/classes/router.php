@@ -11,7 +11,7 @@ class router {
     protected $basePath;
 
     public function __construct(array $options = array()) {
-        $this->basePath = getConfig("base_dir");
+        $this->basePath = getConfig("url","base_dir");
         if(empty($options)) {
             $this->parseUri();
         } else {

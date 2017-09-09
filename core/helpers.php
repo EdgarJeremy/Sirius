@@ -5,8 +5,11 @@
  * @param [string] $name
  * @return mixed[string|null]
  */
-function getConfig($name) {
-    return (isset($GLOBALS["config"][$name])) ? $GLOBALS["config"][$name] : null;
+function getConfig($name,$child = null) {
+    if(is_null($child))
+        return (isset($GLOBALS["config"][$name])) ? $GLOBALS["config"][$name] : null;
+    else
+        return (isset($GLOBALS["config"][$name][$child])) ? $GLOBALS["config"][$name][$child] : null;
 }
 
 /**
@@ -65,7 +68,7 @@ function ambilWebdirDinamis() {
  * @return ci_db\CI_DB instance
  */
 function getDb() {
-    require_once "library/ci_db/DB.php";
+    require_once "third_party/ci_db/DB.php";
     $db =&ci_db\DB(getConfig("database"));
     return $db;
 }

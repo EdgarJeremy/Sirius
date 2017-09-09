@@ -37,6 +37,7 @@ class basepoint extends mc_base {
         $sendArray["status"] = $this->status;
         $sendArray[($this->status) ? "data" : "pesan"] = ($this->status) ? $this->data : $this->pesan;
         $sendArray["waktu_eksekusi"] = $this->ambilTotalWaktu();
+        if(getConfig[""])
         json::output($sendArray);
         exit();
     }
@@ -51,7 +52,7 @@ class basepoint extends mc_base {
     }
 
     protected function pakaiModel(array $models) {
-        $prepend = getConfig("model_prepend");
+        $prepend = getConfig("model","model_prepend");
         foreach($models as $key=>$model) {
             $classname = $model.$prepend;
             if(!is_numeric($key))

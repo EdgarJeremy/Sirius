@@ -3,10 +3,20 @@
 
 class mc_base {
 
-    protected $db;
+    protected $load;
 
     public function __construct() {
-        $this->db = getDb();
+        $this->load = new loader($this);
+        $autoloads = getConfig("autoload");
+        foreach($autoloads as $type=>$lists) {
+            foreach($lists as $key=>$item) {
+                if($item === "database") {
+                    $this->db = getDb();
+                    continue;
+                }
+                $this->load->$type($item);
+            }
+        }
     }
-
+    
 }

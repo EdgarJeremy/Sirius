@@ -7,12 +7,12 @@ $config = array();
 /*
 ** Konfigurasi url 
 */
-$config["base_host"] = "http://" . $_SERVER["HTTP_HOST"];
-$config["base_dir"] = ambilWebdirDinamis();
-$config["base_url"] = $config["base_host"] . $config["base_dir"];
+$config["url"]["base_host"] = "http://" . $_SERVER["HTTP_HOST"];
+$config["url"]["base_dir"] = ambilWebdirDinamis();
+$config["url"]["base_url"] = $config["url"]["base_host"] . $config["url"]["base_dir"];
 
 /**
- * Konfigurasi database
+ * database
  */
 $config["database"]["dsn"] = "";
 $config["database"]["hostname"] = "localhost";
@@ -35,9 +35,20 @@ $config["database"]["failover"] = array();
 $config["database"]["save_queries"] = true;
 
 /**
+ * Development environment
+ */
+$config["env"]["izinkan_browser"] = true;
+
+/**
+ * Autoload library
+ */
+$config["autoload"]["library"] = array();
+$config["autoload"]["model"] = array();
+
+/**
  * Model
  */
-$config["model_prepend"] = "_model";
+$config["model"]["model_prepend"] = "_model";
 
 /**
  * Assign ke $GLOBALS untuk pemakaian global
