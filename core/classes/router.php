@@ -2,16 +2,15 @@
 
 class router {
 
-    const DEFAULT_BASEPOINT = "api";
-    const DEFAULT_ENDPOINT = "index";
-
-    protected $basePoint = self::DEFAULT_BASEPOINT;
-    protected $endPoint = self::DEFAULT_ENDPOINT;
+    protected $basePoint;
+    protected $endPoint;
     protected $params = array();
     protected $basePath;
 
     public function __construct(array $options = array()) {
         $this->basePath = getConfig("url","base_dir");
+        $this->basePoint = getConfig("route","default_basepoint");
+        $this->endPoint = getConfig("route","default_endpoint");
         if(empty($options)) {
             $this->parseUri();
         } else {
@@ -62,6 +61,7 @@ class router {
 
     public function run() {
         if(!file_exists("app/basepoints/{$this->basePoint}.php")) {
+            header("Content-Type: application/json;charset=utf-8");
             json::output(array(
                 "status" => false,
                 "pesan" => "Basepoint '{$this->basePoint}' tidak ditemukan"
@@ -71,6 +71,7 @@ class router {
             $basePointClass = new $this->basePoint;
         }
         if(!method_exists($basePointClass,$this->endPoint)) {
+            header("Content-Type: application/json;charset=utf-8");
             json::output(array(
                 "status" => false,
                 "pesan" => "Endpoint '{$this->endPoint}' tidak ditemukan di basepoint '{$this->basePoint}'"

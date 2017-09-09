@@ -51,6 +51,12 @@ $config["autoload"]["model"] = array();
 $config["model"]["model_prepend"] = "_model";
 
 /**
+ * Default route
+ */
+$config["route"]["default_basepoint"] = "api";
+$config["route"]["default_endpoint"] = "index";
+
+/**
  * Assign ke $GLOBALS untuk pemakaian global
  */
 $GLOBALS["config"] = $config;

@@ -6,6 +6,9 @@ class basepoint extends mc_base {
     protected $status = endpoint::OK;
     protected $pesan = "Error tidak diketahui";
     protected $waktu_mulai;
+    protected $headers = array(
+        "Content-Type" => "application/json;charset=utf8"
+    );
 
     public function __construct() {
         parent::__construct();
@@ -21,6 +24,15 @@ class basepoint extends mc_base {
         return $this;
     }
 
+    protected function setHeaders(array $headers) {
+        if(is_array($headers)) {
+            foreach($headers as $key=>$value) {
+                $this->headers[$key] = $value;
+            }
+        }
+        return $this;
+    }
+
     protected function setData($data) {
         $this->data = $data;
         return $this;
@@ -32,12 +44,11 @@ class basepoint extends mc_base {
     }
 
     protected function send() {
-        header("Content-Type: application/json;charset=utf-8");
+        $this->outputHeaders();
         $sendArray = [];
         $sendArray["status"] = $this->status;
         $sendArray[($this->status) ? "data" : "pesan"] = ($this->status) ? $this->data : $this->pesan;
         $sendArray["waktu_eksekusi"] = $this->ambilTotalWaktu();
-        if(getConfig[""])
         json::output($sendArray);
         exit();
     }
@@ -49,6 +60,12 @@ class basepoint extends mc_base {
         $selesai = $waktu;
         $total = round(($selesai - $this->waktu_mulai),4);
         return $total;
+    }
+
+    private function outputHeaders() {
+        foreach($this->headers as $key=>$header) {
+            header($key . ": " . $header);
+        }
     }
 
     protected function pakaiModel(array $models) {

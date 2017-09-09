@@ -13,7 +13,6 @@ class api extends basepoint {
     public function __construct() {
         parent::__construct();
     }
-
     /**
      * Endpoint default 'api'
      *
@@ -24,13 +23,19 @@ class api extends basepoint {
          * Logika & output disini **/
          $this
             /** Set status output **/
-            ->setStatus(endpoint::OK)
+            ->setStatus(endpoint::GAGAL)
             /** Set data output **/
-            ->setData(array(
-                "judul" => "tcFramework",
-                "pesan" => "Selamat bekerja!"
-            ))
+            ->setData(array("nama"=>"bijon"))
             /** Meluncur! **/
+            ->send();
+    }
+
+    public function test() {
+        $this
+            ->setStatus(endpoint::OK)
+            ->setData(array(
+                "foo" => "bar"
+            ))
             ->send();
     }
 
