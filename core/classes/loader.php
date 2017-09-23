@@ -10,10 +10,9 @@ class loader {
     }
 
     public function library($libName) {
-        $autoload_libs = getConfig("autoload","library");
-        if(in_array($libName,$autoload_libs)) {
+        if(isset($this->context->$libName)) {
             return;
-        } elseif($libName === "database") {
+        } elseif($libName === "database" && !isset($this->context->db)) {
             $this->context->db = getDb();
             return;
         }
@@ -23,9 +22,15 @@ class loader {
         }
     }
 
-    public function model() {
-        $autoload_model = getConfig("autoload","model");
-        
+    public function model($modelName) {
+        if(isset($this->context->$modelName)) {
+            return;
+        }
+        $className = $modelName.getConfig("model","model_prepend");
+        if(file_exists("app/models/{$className}.php")) {
+            require_once "app/models/{$className}.php";
+            $this->context->$modelName = new $className($this->context->db);
+        }
     }
 
 }

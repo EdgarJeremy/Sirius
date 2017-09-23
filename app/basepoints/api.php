@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2017 TagConn development
- * tcFramework v0.0.1
+ * Sirius v0.0.1
  */
 
 class api extends basepoint {
@@ -12,7 +12,9 @@ class api extends basepoint {
      */
     public function __construct() {
         parent::__construct();
+        // $this->useModel(["otentikasi"]);
     }
+
     /**
      * Endpoint default 'api'
      *
@@ -23,21 +25,22 @@ class api extends basepoint {
          * Logika & output disini **/
          $this
             /** Set status output **/
-            ->setStatus(endpoint::GAGAL)
-            /** Set data output **/
-            ->setData(array("nama"=>"bijon"))
-            /** Meluncur! **/
-            ->send();
-    }
-
-    public function test() {
-        $this
             ->setStatus(endpoint::OK)
+            ->withGet()
+            ->withPost()
+            ->withCookie()
+            ->withMethod()
+            ->withHeaders()
+            ->withRemoteIp()
+            ->withWaktuEksekusi()
+            /** Set data output **/
             ->setData(array(
-                "foo" => "bar"
+                "nama_aplikasi" => getConfig("app","name"),
+                "versi" => getConfig("app","version"),
+                "pesan" => "Selamat bekerja!"
             ))
+            /** Eksekusi **/
             ->send();
     }
 
-    
 }

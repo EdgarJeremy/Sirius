@@ -1783,8 +1783,11 @@ abstract class CI_DB_driver {
 				}
 			}
 		}
-		echo $heading;
-		echo implode('<br>',$message);
+		header("Content-Type: application/json;charset=utf-8");
+		echo \json::output(array(
+			"heading" => $heading,
+			"message" => $message
+		));
 		exit;
 	}
 

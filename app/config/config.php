@@ -4,15 +4,24 @@
  */
 $config = array();
 
-/*
-** Konfigurasi url 
-*/
+/**
+ * App
+ */
+$config["app"]["name"] = "Sirius";
+$config["app"]["version"] = "0.0.1";
+
+/**
+ * Konfigurasi URL
+ * Untuk aplikasi dalam sub direktori,
+ * base_dir harus diisi manual
+ */
 $config["url"]["base_host"] = "http://" . $_SERVER["HTTP_HOST"];
 $config["url"]["base_dir"] = ambilWebdirDinamis();
 $config["url"]["base_url"] = $config["url"]["base_host"] . $config["url"]["base_dir"];
 
 /**
- * database
+ * Database
+ * https://www.codeigniter.com/user_guide/database/index.html
  */
 $config["database"]["dsn"] = "";
 $config["database"]["hostname"] = "localhost";
@@ -40,10 +49,16 @@ $config["database"]["save_queries"] = true;
 $config["env"]["izinkan_browser"] = true;
 
 /**
- * Autoload library
+ * Autoload
  */
 $config["autoload"]["library"] = array();
 $config["autoload"]["model"] = array();
+
+/**
+ * Session
+ */
+$config["session"]["key"] = $config["app"]["name"] . "-" . $config["app"]["version"];
+$config["session"]["cookie_name"] = "sirius_session";
 
 /**
  * Model
@@ -51,10 +66,36 @@ $config["autoload"]["model"] = array();
 $config["model"]["model_prepend"] = "_model";
 
 /**
+ * Field respon default
+ */
+$config["response_field"]["f_get"] = false;
+$config["response_field"]["f_post"] = false;
+$config["response_field"]["f_cookie"] = false;
+$config["response_field"]["f_method"] = true;
+$config["response_field"]["f_headers"] = false;
+$config["response_field"]["f_remote_ip"] = true;
+$config["response_field"]["f_waktu_eksekusi"] = true;
+
+/**
  * Default route
  */
 $config["route"]["default_basepoint"] = "api";
 $config["route"]["default_endpoint"] = "index";
+
+/**
+ * Auth
+ * Mekanisme auth membutuhkan koneksi database
+ * pastikan sebelum mengaktifkan auth, konfigurasi database terlebih dahulu
+ * dan aktifkan database dalam autoloader
+ * 'table_name' adalah nama tabel database untuk mengisi auth key
+ * 'header_key' adalah nama key header yang harus dikirim saat melakukan request dengan auth key
+ * nilai header_key adalah nilai valid dari sebuah key untuk header HTTP
+ * jika punya dua kata, harus dihubungkan dengan tanda dash '-'
+ */
+$config["auth"]["use_key"] = false;
+$config["auth"]["auto_permit_local"] = true;
+$config["auth"]["table_name"] = "sirius_auth";
+$config["auth"]["header_key"] = "Sirius-Key";
 
 /**
  * Assign ke $GLOBALS untuk pemakaian global

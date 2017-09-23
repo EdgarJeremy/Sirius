@@ -9,10 +9,11 @@ class mc_base {
     public function __construct() {
         $this->load = new loader($this);
         $this->input = new input();
+
         $autoloads = getConfig("autoload");
         foreach($autoloads as $type=>$lists) {
             foreach($lists as $key=>$item) {
-                if($item === "database") {
+                if($item === "database" && $type === "library") {
                     $this->db = getDb();
                     continue;
                 }
