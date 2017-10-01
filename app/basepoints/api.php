@@ -12,6 +12,9 @@ class api extends basepoint {
      */
     public function __construct() {
         parent::__construct();
+        if($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
+            exit();
+        }
         // $this->useModel(["otentikasi"]);
     }
 
@@ -42,5 +45,5 @@ class api extends basepoint {
             /** Eksekusi **/
             ->send();
     }
-
+    
 }

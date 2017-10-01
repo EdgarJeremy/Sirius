@@ -14,7 +14,7 @@ class input {
         if(is_null($key))
             return (empty($_POST)) ? $phpInput : $_POST;
         else
-            return (isset($_POST[$key])) ? $_POST[$key] : (isset($phpInput[$key])) ? $phpInput[$key] : "";
+            return (isset($_POST[$key])) ? $_POST[$key] : ((isset($phpInput[$key])) ? $phpInput[$key] : "");
     }
 
     public function cookie($key = null) {
