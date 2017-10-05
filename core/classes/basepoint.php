@@ -136,9 +136,11 @@ class basepoint extends mc_base {
             $sendArray["waktu_eksekusi"] = $this->ambilTotalWaktu();
 
         if($this->izinkanBrowser){
+            cekError();
             json::output($sendArray);
         } else {
             if($this->isAjax) {
+                cekError();
                 json::output($sendArray);
             }
         }

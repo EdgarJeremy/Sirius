@@ -12,6 +12,7 @@
 $errors = array();
 /** Set reporting ke mode disable */
 error_reporting(0);
+ob_start();
 
 /** Require file */
 require_once "core/helpers.php";
@@ -27,6 +28,7 @@ $router = new router();
 $router->run();
 
 /** Output error */
-if(!empty($errors)) {
-    json::output($errors);
-}
+cekError();
+// if(!empty($errors)) {
+//     json::output($errors);
+// }

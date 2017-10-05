@@ -15,7 +15,6 @@ class api extends basepoint {
         if($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
             exit();
         }
-        // $this->useModel(["otentikasi"]);
     }
 
     /**

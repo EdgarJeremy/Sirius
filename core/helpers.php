@@ -32,7 +32,11 @@ function fatalError() {
         $error = error_get_last();
         $error["code"] = $error["type"];
         $error["type"] = tipeError($error["type"]);
-        echo json_encode([$error]);
+        $outError = array(
+            "status" => "PHPERROR",
+            "errors" => $error
+        );
+        echo json_encode($outError);
     }
 }
 
@@ -54,6 +58,18 @@ function noticeError($errno, $errstr, $errfile, $errline) {
         "code" => $errno,
         "type" => tipeError($errno)
     );
+}
+
+function cekError() {
+    global $errors;
+    if(!empty($errors)) {
+        ob_end_clean();
+        $outErrors = array(
+            "status" => "PHPERROR",
+            "errors" => $errors
+        );
+        json::output($outErrors);
+    }
 }
 
 function ambilWebdirDinamis() {
