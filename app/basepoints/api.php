@@ -12,9 +12,11 @@ class api extends basepoint {
      */
     public function __construct() {
         parent::__construct();
-        if($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
-            exit();
-        }
+        $this->skipOptions();
+        $this->setHeaders([
+            "Content-Type" => "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin" => "*"
+        ]);
     }
 
     /**
@@ -44,5 +46,5 @@ class api extends basepoint {
             /** Eksekusi **/
             ->send();
     }
-    
+
 }

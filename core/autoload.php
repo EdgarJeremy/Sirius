@@ -7,6 +7,8 @@ function loader($classname) {
         require_once "app/models/{$classname}.php";
     } elseif(file_exists("core/classes/{$classname}.php")) {
         require_once "core/classes/{$classname}.php";
+    } elseif(file_exists("core/libraries/sub/{$classname}.php")) {
+        require_once "core/libraries/sub/{$classname}.php";
     }
 }
 

@@ -17,7 +17,7 @@ class basepoint extends mc_base {
 
     protected $waktu_mulai;
     protected $headers = array(
-        "Content-Type" => "application/json;charset=utf8"
+        "Content-Type" => "application/json;charset=utf8",
     );
 
     public function __construct() {
@@ -68,6 +68,11 @@ class basepoint extends mc_base {
         $this->waktu_mulai = $waktu;
     }
 
+    protected function skipOptions() {
+        if($_SERVER["REQUEST_METHOD"] == "OPTIONS")
+            exit();
+    }
+
     protected function setStatus(bool $status) {
         if(is_bool($status))
             $this->status = $status;
@@ -106,6 +111,20 @@ class basepoint extends mc_base {
             $this->send();
         }
         return $this;
+    }
+
+    protected function setRequiredPost(array $body) {
+        $fieldGagal = array();
+        foreach($body as $key=>$item) {
+            if(!$this->input->has_post($item)) {
+                array_push($fieldGagal,$item);
+            }
+        }
+        if(!empty($fieldGagal)) {
+            $this->setStatus(endpoint::GAGAL);
+            $this->setMessage("Field POST '" . implode(",",$fieldGagal) . "' harus dikirim!");
+            $this->send();
+        }
     }
 
     protected function send() {

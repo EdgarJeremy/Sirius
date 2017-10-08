@@ -1764,6 +1764,7 @@ abstract class CI_DB_driver {
 		// the backtrace until the source file is no longer in the
 		// database folder.
 		$trace = debug_backtrace();
+		$dbErrors = [];
 		foreach ($trace as $call)
 		{
 			if (isset($call['file'], $call['class']))
@@ -1783,10 +1784,9 @@ abstract class CI_DB_driver {
 				}
 			}
 		}
-		header("Content-Type: application/json;charset=utf-8");
 		echo \json::output(array(
-			"heading" => $heading,
-			"message" => $message
+			"status" => "PHPDBERROR",
+			"errors" => $message
 		));
 		exit;
 	}

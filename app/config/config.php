@@ -7,8 +7,8 @@ $config = array();
 /**
  * App
  */
-$config["app"]["name"] = "Sirius";
-$config["app"]["version"] = "0.0.1";
+$config["app"]["name"] = "Sirius Framework";
+$config["app"]["version"] = "0.0.2";
 
 /**
  * Konfigurasi URL
@@ -16,7 +16,7 @@ $config["app"]["version"] = "0.0.1";
  * base_dir harus diisi manual
  */
 $config["url"]["base_host"] = "http://" . $_SERVER["HTTP_HOST"];
-$config["url"]["base_dir"] = ambilWebdirDinamis();
+$config["url"]["base_dir"] = "/sirius_dev/sirius-0.0.2/"; // Default / Root directory
 $config["url"]["base_url"] = $config["url"]["base_host"] . $config["url"]["base_dir"];
 
 /**
@@ -26,7 +26,7 @@ $config["url"]["base_url"] = $config["url"]["base_host"] . $config["url"]["base_
 $config["database"]["dsn"] = "";
 $config["database"]["hostname"] = "localhost";
 $config["database"]["username"] = "root";
-$config["database"]["password"] = "sdsd";
+$config["database"]["password"] = "";
 $config["database"]["database"] = "";
 $config["database"]["dbdriver"] = "mysqli";
 $config["database"]["dbprefix"] = "";

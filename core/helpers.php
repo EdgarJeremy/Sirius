@@ -13,6 +13,15 @@ function getConfig($name,$child = null) {
 }
 
 /**
+ * Base url getter
+ * @param [string] route
+ * @return [string]
+ */
+function base_url($route = "") {
+    return $GLOBALS["config"]["url"]["base_url"] . $route;
+}
+
+/**
  * exit() tanpa error
  * @return void
  */
@@ -34,7 +43,7 @@ function fatalError() {
         $error["type"] = tipeError($error["type"]);
         $outError = array(
             "status" => "PHPERROR",
-            "errors" => $error
+            "errors" => [$error]
         );
         echo json_encode($outError);
     }

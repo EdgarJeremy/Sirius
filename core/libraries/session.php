@@ -6,7 +6,8 @@ class session {
     private $curr_session;
 
     public function __construct() {
-        session_start();
+        if(session_status() === PHP_SESSION_NONE)
+            session_start();
         $this->session_key = getConfig("session","key");
         if(!isset($_SESSION[$this->session_key]))
             $_SESSION[$this->session_key] = array();

@@ -62,6 +62,7 @@ class router {
     public function run() {
         if(!file_exists("app/basepoints/{$this->basePoint}.php")) {
             header("Content-Type: application/json;charset=utf-8");
+            http_response_code(404);
             json::output(array(
                 "status" => false,
                 "pesan" => "Basepoint '{$this->basePoint}' tidak ditemukan"
@@ -72,6 +73,7 @@ class router {
         }
         if(!method_exists($basePointClass,$this->endPoint)) {
             header("Content-Type: application/json;charset=utf-8");
+            http_response_code(404);
             json::output(array(
                 "status" => false,
                 "pesan" => "Endpoint '{$this->endPoint}' tidak ditemukan di basepoint '{$this->basePoint}'"

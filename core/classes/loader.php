@@ -19,6 +19,12 @@ class loader {
         if(file_exists("core/libraries/{$libName}.php")) {
             require_once "core/libraries/{$libName}.php";
             $this->context->$libName = new $libName();
+            return;
+        }
+        if(file_exists("app/libraries/{$libName}.php")) {
+            require_once "app/libraries/{$libName}.php";
+            $this->context->$libName = new $libName();
+            return;
         }
     }
 
