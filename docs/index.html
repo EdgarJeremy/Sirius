@@ -1,1 +1,200 @@
-<h2>Test</h2>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Sirius - Documentation</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/demo.css">
+	<link rel="stylesheet" href="assets/sidebar-collapse.css">
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link href="assets/jquery.jsonview.min.css" rel='stylesheet' type='text/css'>
+
+
+</head>
+
+<body>
+
+	<aside class="sidebar-left-collapse">
+
+		<a href="#" class="company-logo">Sirius</a>
+
+		<div class="sidebar-links">
+
+			<div class="link-black selected">
+
+				<a href="index.html">
+					<i class="fa fa-home"></i>Home
+				</a>
+
+			</div>
+
+			<div class="link-blue">
+
+				<a href="#">
+					<i class="fa fa-cog"></i>Instalasi & Konfigurasi
+				</a>
+
+				<ul class="sub-links">
+					<li><a href="#" class="active">Cara Install</a></li>
+					<li><a href="#">Konfigurasi Awal</a></li>
+				</ul>
+
+			</div>
+
+			<div class="link-red">
+
+				<a href="#">
+					<i class="fa fa-heart-o"></i>Favorites
+				</a>
+
+				<ul class="sub-links">
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+				</ul>
+
+			</div>
+
+			<div class="link-yellow">
+
+				<a href="#">
+					<i class="fa fa-keyboard-o"></i>Projects
+				</a>
+
+				<ul class="sub-links">
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+				</ul>
+
+			</div>
+
+			<div class="link-green">
+
+				<a href="#">
+					<i class="fa fa-map-marker"></i>Places
+				</a>
+
+				<ul class="sub-links">
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+
+	</aside>
+
+	<div class="main-content">
+
+		<!-- <div class="menu">
+
+			<img class="arrow left" src="assets/images/demo-arrow-left.png" alt="arrow" height="120">
+			<img class="arrow up" src="assets/images/demo-arrow-up.png" alt="arrow" height="150">
+
+			<h1>Freebie: 5 Responsive Sidebar Templates</h1>
+
+			<h2><a href="http://tutorialzine.com/2015/04/freebie-5-elegant-and-responsive-sidebar-templates/">Download</a></h2>
+
+			<ul>
+				<li><a href="index.html">Basic</a></li>
+				<li><a href="sidebar-advanced.html">Advanced</a></li>
+				<li><a href="sidebar-left.html">Left</a></li>
+				<li><a href="sidebar-collapse.html" class="active">Collapse</a></li>
+				<li><a href="sidebar-light.html">Light</a></li>
+			</ul>
+
+		</div> -->
+		<h1>Introduction</h1>
+		<p class="summer">
+			Framework backend berbasis Model-Controller yang berfokus pada pengembangan aplikasi <i><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a></i> API.
+			Sirius merepresentasikan tiap response dalam tipe konten http <code>application/json</code> dan transportasi response HTTP code seperti biasa layaknya response HTTP pada umumnya.<br/><br/>
+			Sirius melakukan transport url melalui routing seperti sifat framework Codeigniter, hanya saja istilah untuk <b>controller</b> diganti dengan <b>basepoint</b> dan <b>method</b> class controller diganti dengan istilah <b>endpoint</b>
+		</p>
+		<hr />
+		<h4>Perbandingan routing CI dengan Sirius</h4>
+		<p class="summer">
+			Codeigniter : <br />
+			<code>http://{domain}/index.php/{controller}/{method}/{param1}/{param2}/.../{paramN}</code><br /><br />
+			Sirius : <br />
+			<code>http://{domain}/index.php/{basepoint}/{endpoint}/{param1}/{param2}/.../{paramN}</code>
+		</p>
+		<hr />
+		<h4>Standard struktur response</h4>
+		<p class="summer">
+			Sirius memiliki standar response berupa objek JSON yang memiliki nilai masing-masing. Struktur-struktur ini adalah standar yang nantinya perlu diketahui seorang front-end atau pengembang aplikasi multiplatform agar dapat dilakukan penyesuaian dalam penggunaan response
+			<ol>
+				<b><li>Response Operasi Sukses</li></b>
+				Operasi sukses ditandai dengan response HTTP status code <code class="btn-success">200</code> dan property <code>status</code> adalah <code>true</code>, berikut contoh struktur JSONnya
+				<pre class="json">{
+						"status": true,
+						"data": {
+							"nama_aplikasi": "Sirius Framework",
+							"versi": "0.0.2",
+							"pesan": "Selamat bekerja!"
+						},
+						"f_method": "GET",
+						"f_remote_ip": "::1",
+						"waktu_eksekusi": 0.000100000000000000004792173602385929598312941379845142364501953125
+					}</pre>
+				Response operasi sukses juga akan diikuti dengan property <code>data</code> yang akan berisi data response dari backend sesuai dengan kebutuhan endpoint
+				<b><li>Response Operasi Gagal</li></b>
+				Operasi gagal ditandai dengan response HTTP status code <code class="btn-success">200</code> dan property <code>status</code> bernilai <code>false</code>, berikut contoh struktur JSONnya
+				<pre class="json">
+					{"status":false,"message":"Operasi yang anda inginkan gagal dijalankan","f_method":"GET","f_remote_ip":"::1","waktu_eksekusi":0.000100000000000000004792173602385929598312941379845142364501953125}
+				</pre>
+				Operasi gagal juga ditandai dengan property <code>message</code> yang berisi pesan kegagalan yang berkaitan dengan operasi tersebut, pesan tersebut ditentukan dari kode backend yang bersangkutan.
+				<b><li>Response Server/PHP Error</li></b>
+				Response Server/PHP error ditandai dengan response HTTP status code <code class="btn-danger">500</code> dan property status bernilai string <code>"PHPERROR"</code>, berikut contoh struktur JSONnya
+				<pre class="json">
+						{
+							"status": "PHPERROR",
+							"errors": [
+								{
+									"type": "E_PARSE",
+									"message": "syntax error, unexpected '->' (T_OBJECT_OPERATOR)",
+									"file": "/Applications/XAMPP/xamppfiles/htdocs/sirius_dev/sirius-0.0.2/app/basepoints/api.php",
+									"line": 47,
+									"code": 4
+								}
+							]
+						}
+				</pre>
+				Response Server/PHP error juga disertai dengan property <code>errors</code> yang berisikan <i>array</i> dari error-error yang terjadi saat runtime
+			</ol>
+		</p>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="assets/jquery.jsonview.min.js"></script>
+	<script src="assets/custom.js"></script>
+	<script>
+
+		$(function () {
+
+			var links = $('.sidebar-links > div');
+
+			links.on('click', function () {
+
+				links.removeClass('selected');
+				$(this).addClass('selected');
+
+			});
+		});
+
+	</script>
+
+</body>
+
+</html>
