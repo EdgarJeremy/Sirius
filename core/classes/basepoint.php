@@ -127,6 +127,48 @@ class basepoint extends mc_base {
         }
     }
 
+    protected function filterMethodField($type,$keys) {
+        if(is_array($type)) {
+            $m_data = $type;
+        } else {
+            $type = strtolower($type);
+            if(method_exists($this->input,$type)) {
+                $m_data = $this->input->$type();
+            } else return false;
+        }
+        foreach($m_data as $key=>$value) {
+            if(!in_array($key,$keys)) {
+                unset($m_data[$key]);
+            }
+        }
+        return $m_data;
+    }
+
+    protected function filterMethodValues($type,$rules) {
+        if(is_array($type)) {
+            $m_data = $type;
+        } else {
+            $type = strtolower($type);
+            if(method_exists($this->input,$type)) {
+                $m_data = $this->input->$type();
+            } else return false;
+        }
+        $invalids = array();
+        foreach($m_data as $key=>$value) {
+            if(isset($rules[$key])) {
+                $allow = explode("|",$rules[$key]);
+                if(!in_array($value,$allow)) {
+                    array_push($invalids,$key);
+                }
+            }
+        }
+        if(!empty($invalids)) {
+            $this->setStatus(endpoint::GAGAL);
+            $this->setMessage("Value dari field " . implode(",",$invalids) .  " tidak diizinkan");
+            $this->send();
+        } else return $this;
+    }
+
     protected function send() {
         $this->outputHeaders();
         $sendArray = [];
