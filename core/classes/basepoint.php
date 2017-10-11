@@ -73,7 +73,7 @@ class basepoint extends mc_base {
             exit();
     }
 
-    protected function setStatus(bool $status) {
+    protected function setStatus($status) {
         if(is_bool($status))
             $this->status = $status;
         return $this;
